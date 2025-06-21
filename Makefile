@@ -4,6 +4,7 @@ EMU=qemu-system-x86_64
 OUT=out
 IMG=$(OUT)/boot.img
 SRC=boot/boot.asm
+DUMPER=xxd
 
 all: $(IMG)
 
@@ -13,6 +14,9 @@ $(IMG): $(SRC)
 
 run: $(IMG)
 	$(EMU) -drive format=raw,file=$(IMG)
+
+inspect: $(IMG)
+	@$(DUMPER) $(IMG)
 
 clean:
 	rm -rf $(OUT)
