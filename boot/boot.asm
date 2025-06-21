@@ -8,6 +8,10 @@ start:
   xor   ax, ax
   mov   ds, ax
 
+clr_screen:
+  mov   ax, 0x0003
+  int   0x10
+
 card:
   mov   si, header
   call  putsln
