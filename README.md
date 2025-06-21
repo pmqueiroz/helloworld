@@ -21,7 +21,17 @@ I always thought that `helloworlding` as the first thing to do in a new language
 * Emulator: `qemu-system-x86_64`
 
 #### Running
+Build boot image into `/out`
+```shell
+make
+```
 
+Build image and run directly in emulator
 ```shell
 make run
+```
+
+Build image and hex dump
+```shell
+make inspect
 ```
