@@ -1,4 +1,7 @@
-org 0x7C00
+%define BOOTSEG  0x7C00
+%define BOOTSIG  0xAA55
+
+org BOOTSEG
 bits 16
 
 start:
@@ -16,4 +19,4 @@ message db "hello world", 0
 %include "lib/puts.asm"
 
 times 510 - ($ - $$) db 0
-dw 0xAA55
+dw BOOTSIG

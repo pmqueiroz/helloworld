@@ -22,8 +22,5 @@ I always thought that `helloworlding` as the first thing to do in a new language
 #### Running
 
 ```shell
-# assemble
-make
-# run
 make run
 ```
