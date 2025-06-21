@@ -1,3 +1,5 @@
+%define ENDL 0x0D, 0x0A
+
 puts:
   pusha
 
@@ -9,19 +11,15 @@ puts:
   int    0x10
   jmp    .loop
 
-.end: 
+.end:
   popa
   ret
 
 putsln:
-  call puts
-
-  mov    al, 0x0D
-  mov    ah, 0x0E
-  int    0x10
-
-  mov    al, 0x0A
-  mov    ah, 0x0E
-  int    0x10
-
+  call   puts
+  mov    si, end_of_line
+  call   puts
   ret
+
+end_of_line:
+  db ENDL
