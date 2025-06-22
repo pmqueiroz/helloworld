@@ -1,10 +1,11 @@
-ASM      = nasm
-ASMFLAGS = -f bin
-EMU      = qemu-system-x86_64
-OUT      = out
-IMG      = $(OUT)/boot.img
-SRC      = boot/boot.asm
-DUMPER   = xxd
+ASM         = nasm
+ASMFLAGS    = -f bin
+EMU         = qemu-system-x86_64
+OUT         = out
+IMG         = $(OUT)/boot.img
+SRC         = boot/boot.asm
+DUMPER      = xxd
+DUMPERFLAGS = -d -u -R always
 
 all: $(IMG)
 
@@ -16,7 +17,7 @@ run: clean $(IMG)
 	$(EMU) -drive format=raw,file=$(IMG)
 
 inspect: clean $(IMG)
-	@$(DUMPER) $(IMG)
+	@$(DUMPER) $(DUMPERFLAGS) $(IMG)
 
 clean:
 	rm -rf $(OUT)
