@@ -6,6 +6,10 @@ print_card:
   call  putsln
   mov   si, blank
   call  putsln
+  mov   si, linkedin
+  call  putsln
+  mov   si, github
+  call  putsln
   mov   si, website
   call  putsln
   mov   si, footer
