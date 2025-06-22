@@ -1,25 +1,45 @@
-%define ENDL 0x0D, 0x0A
+%define PURPLE_ON_BLACK 0xF0
 
+; print string in register SI
 puts:
-  pusha
+  xor    dh, dh    ; row = 0
+  xor    dl, dl    ; col = 0
+  mov    bh, 0x00  ; page 0
 
-.loop:
+.loop_char:
   lodsb
-  or     al, al
-  jz     .end
-  mov    ah, 0x0E
+  cmp    al, 0
+  je     .end
+
+.print_char:
+  mov    ah, 0x09
+  mov    bl, PURPLE_ON_BLACK
+  mov    cx, 1
   int    0x10
-  jmp    .loop
+
+.advance_cursor:
+  mov    ah, 0x03
+  int    0x10
+  inc    dl
+  mov    ah, 0x02
+  int    0x10
+
+  jmp    .loop_char
 
 .end:
-  popa
   ret
 
+; print string in register SI and add new line
 putsln:
   call   puts
-  mov    si, end_of_line
-  call   puts
+  call   eol
   ret
 
-end_of_line:
-  db ENDL
+eol:
+  mov ah, 0x03
+  int 0x10
+  xor dl, dl
+  inc dh
+  mov ah, 0x02
+  int 0x10
+  ret
